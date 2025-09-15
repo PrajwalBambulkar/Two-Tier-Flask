@@ -40,3 +40,13 @@ Add service DNS in your app deployment (do not hardcode ClusterIP):
 - Install Argo CD in argocd namespace:
 - kubectl create namespace argocd
 - kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+#### Expose Argo CD server for local access (NodePort):
+- kubectl -n argocd patch svc argocd-server -p '{"spec": {"type": "NodePort"}}'
+- kubectl -n argocd get svc argocd-server
+
+#### Open http://<node-ip>:<nodeport> in browser.
+- Get initial admin password:
+- kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+- Login UI: admin / (password above). Optional: change password.
+  
