@@ -30,3 +30,11 @@ kubectl apply -f persistent-volume.yml
 ```bash
 kubectl apply -f persistent-volume-claim.yml
 ```
+Add service DNS in your app deployment (do not hardcode ClusterIP):
+- name: MYSQL_HOST
+  value: "mysql"
+
+### **Install Argo CD and access UI**
+- Install Argo CD in argocd namespace:
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
