@@ -38,5 +38,5 @@ Add service DNS in your app deployment (do not hardcode ClusterIP):
 
 ### **Install Argo CD and access UI**
 - Install Argo CD in argocd namespace:
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+- kubectl create namespace argocd
+- kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
