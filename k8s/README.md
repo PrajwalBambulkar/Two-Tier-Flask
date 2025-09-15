@@ -49,4 +49,8 @@ Add service DNS in your app deployment (do not hardcode ClusterIP):
 - Get initial admin password:
 - kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 - Login UI: admin / (password above). Optional: change password.
-  
+
+##### cd argocd-apps
+```bash
+kubectl apply -f .
+```
