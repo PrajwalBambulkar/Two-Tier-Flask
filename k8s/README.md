@@ -54,3 +54,26 @@ Add service DNS in your app deployment (do not hardcode ClusterIP):
 ```bash
 kubectl apply -f .
 ```
+
+### Error if you get
+- MySQLdb.ProgrammingError: (1146, "Table 'mydb.messages' doesn't exist")
+- Cause: DB schema (table) missing.Fix: Connect to MySQL and run DDL or use migrations.
+- # then run CREATE TABLE ...
+
+### SharedResourceWarning & argocd.argoproj.io/tracking-id conflicts (PV ownership)
+##### Cause: Two Argo CD apps try to manage the same cluster-scoped resource (PV/PVC). Argo CD annotates resources with a tracking id. Fixes (pick one):
+- Move PV manifests out of Git or keep PV only in mysql-app (recommended).
+- Change PV reclaimPolicy to Retain to avoid accidental data removal.
+- Or tell Argo CD to ignoreDifferences for the PV tracking annotation.
+```bash
+ignoreDifferences:
+- group: ""
+kind: PersistentVolume
+name: mysql-pv
+jsonPointers:
+- /metadata/annotations/argocd.argoproj.io~1tracking-id
+```
+
+#### SharedResourceWarning: Deployment/two-tier-app is part of applications ...
+- Cause: Both ArgoCD apps pointed to the same k8s/ path and applied overlapping resources. Fix: Move manifests to separate subfolders and point each ArgoCD Application to its path.
+
