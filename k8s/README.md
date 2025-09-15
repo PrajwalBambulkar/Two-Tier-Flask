@@ -58,7 +58,7 @@ kubectl apply -f .
 ### Error if you get
 - MySQLdb.ProgrammingError: (1146, "Table 'mydb.messages' doesn't exist")
 - Cause: DB schema (table) missing.Fix: Connect to MySQL and run DDL or use migrations.
-- # then run CREATE TABLE ...
+- then run CREATE TABLE ...
 
 ### SharedResourceWarning & argocd.argoproj.io/tracking-id conflicts (PV ownership)
 ##### Cause: Two Argo CD apps try to manage the same cluster-scoped resource (PV/PVC). Argo CD annotates resources with a tracking id. Fixes (pick one):
